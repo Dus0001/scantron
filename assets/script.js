@@ -35,8 +35,10 @@ var li1 = document.querySelector("#option-1");
 var li2 = document.querySelector("#option-2");
 var li3 = document.querySelector("#option-3");
 var li4 = document.querySelector("#option-4");
-var timeDisplay = document.querySelector("time-left");
+var timeDisplay = document.querySelector(".time-left");
 optionEl = document.querySelectorAll(".options");
+let count;
+var time;
 
 
 //let score = timeLeft
@@ -57,6 +59,7 @@ function questionPrompt(){
         li3.textContent = quizInfo.option3;
         li4.textContent = quizInfo.option4;
 
+       
 };
 
 
@@ -79,8 +82,12 @@ optionEl.forEach( li => {
 
 
 //quiz timer function
-var startTimer = function() {
-
+function startTimer(time){
+count = setInterval(timer,1000);
+function timer(){
+    timeDisplay.textContent=time;
+    time --;
+}
 }
 
 
@@ -101,7 +108,7 @@ submitBtn.addEventListener("click", () => {
     };
     
     //send user info to local storage
-    localStorage.setItem("userInfo", JSON.stringify(user));
+    userInfo.setItem("userInfo", JSON.stringify(user));
     console.log("saved")
 });
   
@@ -123,14 +130,17 @@ optionEl.forEach(li => {
         if (answerClicked === questionAndAnswers[quizDisplayed].answer) {
             console.log ("Correct!")
     
-        } else (answerClicked === !questionAndAnswers[quizDisplayed].answer) 
+        } else  (answerClicked === !questionAndAnswers[quizDisplayed].answer) 
         quizDisplayed++;
         console.log(quizDisplayed)
+    
     
         if (quizDisplayed < questionAndAnswers.length) {
             questionPrompt();
         }else {
             // submit getUserInfo ()
+            clearInterval(time)
+            
             console.log ("get user info");
         }
     });
