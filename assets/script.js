@@ -46,6 +46,7 @@ let quizDisplayed = 0
 
 //start quiz function
 function questionPrompt(){
+    
     console.log ("clicked");
     
         const quizInfo = questionAndAnswers[quizDisplayed];
@@ -66,7 +67,7 @@ function optionSelected() {
 
 let correct = undefined;
 
-optionEl.forEach((li) => {
+optionEl.forEach( li => {
     if(li.checked) {
       correct = li.value;  
     }
@@ -89,6 +90,21 @@ var startTimer = function() {
 //quiz screen function
 
 //submit user info
+var submitBtn = document.querySelector(".submit-btn")
+
+submitBtn.addEventListener("click", () => {
+
+    var userInput = document.querySelector("#user-info");
+
+    var userInfo = {
+        user: userInput.value.trim(),
+    };
+    
+    //send user info to local storage
+    localStorage.setItem("userInfo", JSON.stringify(user));
+    console.log("saved")
+});
+  
 
 
 //final page
@@ -97,17 +113,17 @@ var startTimer = function() {
 //add event listeners
 startQuizBtn.addEventListener("click",() => questionPrompt());
 
-const answer = optionSelected 
+const answerClicked = optionSelected 
 
 //add event listener to the li elements
 optionEl.forEach(li => {
     li.addEventListener("click", () => {
-        const answer = optionSelected 
+        let answerClicked = optionSelected 
     
-        if (answer === questionAndAnswers[quizDisplayed].answer) {
+        if (answerClicked === questionAndAnswers[quizDisplayed].answer) {
             console.log ("Correct!")
     
-        };
+        } else (answerClicked === !questionAndAnswers[quizDisplayed].answer) 
         quizDisplayed++;
         console.log(quizDisplayed)
     
