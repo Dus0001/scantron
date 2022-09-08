@@ -37,8 +37,8 @@ var li3 = document.querySelector("#option-3");
 var li4 = document.querySelector("#option-4");
 var timeDisplay = document.querySelector(".time-left");
 optionEl = document.querySelectorAll(".options");
-let count;
 var time;
+var score = time; 
 
 
 //let score = timeLeft
@@ -82,13 +82,48 @@ optionEl.forEach( li => {
 
 
 //quiz timer function
-function startTimer(time){
-count = setInterval(timer,1000);
+function startTimer(time) {
+let count = setInterval(timer, 1000);
 function timer(){
+
+    if (time > 1 ) {
+        timeDisplay.textContent = "You have" + time + "secs left.";
+
     timeDisplay.textContent=time;
     time --;
+    }
+    else if (time < 2) {
+        timeDisplay.textContent = ("you have" + time + "sec  left");
+        console.log("you have less then 10 sec")
+
+    timeDisplay.textContent=time;
+    time --;
+    } 
+    else if (quizDisplayed < questionAndAnswer.length) {
+         
+        clearInterval(count);
+        //save the final time as score
+         score.setItem(time);
+
+         //getUserInfo ();
+
+
+    timeDisplay.textContent=time;
+    time --;
+    }
+    else if (time === 0) {
+        //stop the timer
+        clearInterval(setInterval)
+        timeDisplay.textContent = "00"
+       //getUserInfo ();
+        
+
+    timeDisplay.textContent=time;
+    time --;
+    }
+    
 }
-}
+};
 
 
 //highscore funtion
@@ -116,33 +151,28 @@ submitBtn.addEventListener("click", () => {
 
 //final page
 
-
 //add event listeners
-startQuizBtn.addEventListener("click",() => (questionPrompt(),  startTimer(70)) );
+startQuizBtn.addEventListener("click",() => (questionPrompt(), startTimer(20)));
 
-const answerClicked = optionSelected 
+const answer = optionSelected 
 
 //add event listener to the li elements
 optionEl.forEach(li => {
     li.addEventListener("click", () => {
-        let answerClicked = optionSelected 
+        const answer = optionSelected 
     
-        if (answerClicked === questionAndAnswers[quizDisplayed].answer) {
+        if (answer === questionAndAnswers[quizDisplayed].answer) {
             console.log ("Correct!")
     
-        } else  (answerClicked === !questionAndAnswers[quizDisplayed].answer) 
+        };
         quizDisplayed++;
         console.log(quizDisplayed)
-    
     
         if (quizDisplayed < questionAndAnswers.length) {
             questionPrompt();
         }else {
             // submit getUserInfo ()
-            clearInterval(time)
-            
             console.log ("get user info");
         }
     });
 })
-
