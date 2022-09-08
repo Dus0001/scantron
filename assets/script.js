@@ -66,13 +66,13 @@ function optionSelected() {
 
 let correct = undefined;
 
-optionEl.forEach((optionEl) => {
-    if(optionEl.checked) {
-      correct = optionEl.value;  
+optionEl.forEach((li) => {
+    if(li.checked) {
+      correct = li.value;  
     }
 });
-return correct
-}
+ return correct
+};
 
 
 
@@ -96,8 +96,10 @@ var startTimer = function() {
 
 //add event listeners
 startQuizBtn.addEventListener("click",() => questionPrompt());
+
 const answer = optionSelected 
 
+//add event listener to the li elements
 optionEl.forEach(li => {
     li.addEventListener("click", () => {
         const answer = optionSelected 
@@ -110,7 +112,7 @@ optionEl.forEach(li => {
         console.log(quizDisplayed)
     
         if (quizDisplayed < questionAndAnswers.length) {
-            questionPrompt
+            questionPrompt();
         }else {
             // submit getUserInfo ()
             console.log ("get user info");
