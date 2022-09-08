@@ -1,21 +1,78 @@
 //create global variables
+let questionAndAnswers = [
+    {
+        question: "What is the 3rd largest city in America?",
+        option1: "Denver", 
+        option2: "Seattle",
+        option3: "Houston",
+        option4: "Chicago",
+        answer: "Houston",
+        
+    },
+    {
+        question: "Who's the best sports teams in the state of Texas?",
+        option1: "Cowboys", 
+        option2: "Astros",
+        option3: "Spurs",
+        option4: "Dynamo",
+        answer: "Astros",
+        
+    },
+    {
+        question: "What is the human body largest organ? ",
+        option1: "Stomach", 
+        option2: "Brain",
+        option3: "Heart",
+        option4: "Skin",
+        answer: "Skin",
+        
+    }
+
+];
 var question = document.querySelector(".question");
+var quiz = document.querySelector(".quiz")
 var li1 = document.querySelector("#option-1");
 var li2 = document.querySelector("#option-2");
 var li3 = document.querySelector("#option-3");
 var li4 = document.querySelector("#option-4");
-var timeLeft = document.querySelector("time-left");
-let score = timeLeft
-var startQuiz = document.querySelector("#start-btn")
+var timeDisplay = document.querySelector("time-left");
+optionEl = document.querySelectorAll(".options");
+
+
+//let score = timeLeft
+var startQuizBtn = document.querySelector("#start-btn")
+let quizDisplayed = 0
+
 
 //start quiz function
-function questionPromt() {
-    question.textContent= "hello World"
-    console.log(question)
+function questionPrompt(){
+    console.log ("clicked");
+    
+        const quizInfo = questionAndAnswers[quizDisplayed];
+
+        question.innerHTML = quizInfo.question
+        li1.textContent = quizInfo.option1;
+        li2.textContent = quizInfo.option2;
+        li3.textContent = quizInfo.option3;
+        li4.textContent = quizInfo.option4;
+
+};
+
+
+
+// function fot option selected
+
+function optionSelected() {
+
+let correct = undefined;
+
+optionEl.forEach((optionEl) => {
+    if(optionEl.checked) {
+      correct = optionEl.value;  
+    }
+});
+return correct
 }
-
-
-
 
 
 
@@ -31,12 +88,33 @@ var startTimer = function() {
 
 //quiz screen function
 
-
-//subnit user info
+//submit user info
 
 
 //final page
 
 
 //add event listeners
-startQuiz.addEventListener("click", questionPromt)
+startQuizBtn.addEventListener("click",() => questionPrompt());
+const answer = optionSelected 
+
+optionEl.forEach(li => {
+    li.addEventListener("click", () => {
+        const answer = optionSelected 
+    
+        if (answer === questionAndAnswers[quizDisplayed].answer) {
+            console.log ("Correct!")
+    
+        };
+        quizDisplayed++;
+        console.log(quizDisplayed)
+    
+        if (quizDisplayed < questionAndAnswers.length) {
+            questionPrompt
+        }else {
+            // submit getUserInfo ()
+            console.log ("get user info");
+        }
+    });
+})
+
