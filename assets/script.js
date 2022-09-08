@@ -118,7 +118,7 @@ submitBtn.addEventListener("click", () => {
 
 
 //add event listeners
-startQuizBtn.addEventListener("click",() => questionPrompt());
+startQuizBtn.addEventListener("click",() => (questionPrompt(),  startTimer(70)) );
 
 const answerClicked = optionSelected 
 
