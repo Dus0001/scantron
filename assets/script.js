@@ -36,13 +36,17 @@ var li2 = document.querySelector("#option-2");
 var li3 = document.querySelector("#option-3");
 var li4 = document.querySelector("#option-4");
 var timeDisplay = document.querySelector(".time-left");
-optionEl = document.querySelectorAll(".options");
+var optionEl = document.querySelectorAll(".options");
 var time;
-var score = time; 
+let score = time; 
+var userInfoPage = document.querySelector(".user-info");
+var startQuizPage = document.querySelector(".start-quiz");
+var quizScreen = document.querySelector(".card");
+var endPage = document.querySelector(".end-page")
 
 
 //let score = timeLeft
-var startQuizBtn = document.querySelector("#start-btn")
+var startQuizBtn = document.querySelector(".start-quiz-btn")
 let quizDisplayed = 0
 
 
@@ -66,13 +70,13 @@ function questionPrompt(){
 
 // function fot option selected
 
-function optionSelected() {
+function optionSelected(answer) {
 
-let correct = undefined;
+let correct = questionAndAnswers[quizDisplayed].answer;
 
 optionEl.forEach( li => {
     if(li.checked) {
-      correct = li.value;  
+      correct = li.checked.value;  
     }
 });
  return correct
@@ -86,40 +90,28 @@ function startTimer(time) {
 let count = setInterval(timer, 1000);
 function timer(){
 
-    if (time > 1 ) {
-        timeDisplay.textContent = "You have" + time + "secs left.";
 
-    timeDisplay.textContent=time;
+
+    if (time > 0 ) {
+        timeDisplay.innerHTML = ["You have" + time + "secs left."];
+
     time --;
     }
-    else if (time < 2) {
-        timeDisplay.textContent = ("you have" + time + "sec  left");
-        console.log("you have less then 10 sec")
+   // else if (time < 2) {
+       // timeDisplay.innerHTML = ["you have" + time + "sec  left"];
+      //  console.log("you have less then 10 sec")
 
-    timeDisplay.textContent=time;
-    time --;
-    } 
-    else if (quizDisplayed < questionAndAnswer.length) {
-         
-        clearInterval(count);
-        //save the final time as score
-         score.setItem(time);
-
-         //getUserInfo ();
-
-
-    timeDisplay.textContent=time;
-    time --;
-    }
+   // time --;
+   // } 
     else if (time === 0) {
         //stop the timer
         clearInterval(setInterval)
-        timeDisplay.textContent = "00"
+        //timeDisplay.textContent = "00"
        //getUserInfo ();
         
 
-    timeDisplay.textContent=time;
-    time --;
+    timeDisplay.innerHTML=time;
+    
     }
     
 }
@@ -132,14 +124,16 @@ function timer(){
 //quiz screen function
 
 //submit user info
-var submitBtn = document.querySelector(".submit-btn")
+var submitBtn = document.querySelector("#submit-btn")
 
 submitBtn.addEventListener("click", () => {
+
+
 
     var userInput = document.querySelector("#user-info");
 
     var userInfo = {
-        user: userInput.value.trim(),
+        user: userInput.value().trim(),
     };
     
     //send user info to local storage
@@ -152,27 +146,31 @@ submitBtn.addEventListener("click", () => {
 //final page
 
 //add event listeners
-startQuizBtn.addEventListener("click",() => (questionPrompt(), startTimer(20)));
-
+startQuizBtn.addEventListener("click",() => {
+    questionPrompt(), 
+    startTimer(5)
+});
 const answer = optionSelected 
 
 //add event listener to the li elements
 optionEl.forEach(li => {
     li.addEventListener("click", () => {
         const answer = optionSelected 
+        console.log(answer)
     
-        if (answer === questionAndAnswers[quizDisplayed].answer) {
+        if ((answer === questionAndAnswers[quizDisplayed].answer) && (quizDisplayed < questionAndAnswers.length)) {
             console.log ("Correct!")
     
         };
         quizDisplayed++;
         console.log(quizDisplayed)
     
-        if (quizDisplayed < questionAndAnswers.length) {
+        if (quizDisplayed < questionAndAnswers.length){
+
             questionPrompt();
-        }else {
+        } else {
             // submit getUserInfo ()
             console.log ("get user info");
-        }
+        };
     });
-})
+});

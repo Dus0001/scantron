@@ -1,0 +1,53 @@
+*{
+    display: inline-block;
+    background-color: white;
+}
+
+
+button {
+    background-color: blueviolet;
+    color: azure;
+
+}
+
+button:hover {
+
+    background-color: aquamarine;
+}
+
+/* Start Quiz Section*/
+.start-quiz {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+   
+    
+}
+
+.start-quiz p {
+   
+    max-width: 40%;
+    font-size: small;
+    
+}
+
+.start-quiz h2 {
+    
+    font-size: medium;
+    font-weight: bold;
+}
+
+/* Start Quiz Prompt */
+
+.quiz,
+.options {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    padding: 20px, 20px;
+
+}
+ 
